@@ -1,7 +1,8 @@
 // ship factory 
-export const shipFactory = (function(length){
+export const shipFactory = (function(length, shipName){
 
     return {
+        shipName: shipName,
         length: null,
         hits: [],
         sunk: null,

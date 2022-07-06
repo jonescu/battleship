@@ -20,26 +20,84 @@ body > nav {
 .game-container {
     height: 100%;
     width: 100vw;
+    position: relative;
 }
 
 .game-container > .gameboards {
-    height: 70%;
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.game-container > .gameboards > .player-board {
+.game-container > .gameboards > .computer-board {
+    display: none;
+}
+
+.game-container > .gameboards > .player-board, .computer-board {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
     justify-content: center;
     align-items: center;
     width: 400px;
+    margin: 1rem;
 }
 
-.player-square {
+.player-square, .ai-square {
     height: 40px;
     width: 40px;
     border: 1px solid black;
 }
+
+.controls {
+    position: absolute;
+    left: calc(50% - 89px)
+}
+
+.controls > button {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+}
+
+.ships {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+.ships > div {
+    margin: 1rem;
+    display: flex;
+}
+
+.ships > div > div {
+    height: 38px;
+    width: 38px;
+    background: red;
+    border: 1px solid black;
+    cursor: move;
+}
+
+.carrier {
+    width: calc(38px * 5);
+}
+
+.battleship {
+    width: calc(38px * 4);
+}
+
+.destroyer {
+    width: calc(38px * 3);
+}
+
+.submarine {
+    width: calc(38px * 3);
+}
+
+.patrol {
+    width: calc(38px * 2);
+}
+
