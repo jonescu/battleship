@@ -1,5 +1,5 @@
 // ship factory 
-export const shipFactory = (function(length, hits, sunk){
+export const shipFactory = (function(length){
 
     return {
         length: null,
@@ -18,4 +18,5 @@ export const shipFactory = (function(length, hits, sunk){
         }
     }
 })()
+
 

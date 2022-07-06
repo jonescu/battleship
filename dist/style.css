@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+}
+
+body > nav {
+    height: 10%;
+    font-family: 'Bebas Neue', cursive;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.game-container {
+    height: 100%;
+    width: 100vw;
+}
+
+.game-container > .gameboards {
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container > .gameboards > .player-board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+}
+
+.player-square {
+    height: 40px;
+    width: 40px;
+    border: 1px solid black;
+}
