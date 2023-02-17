@@ -6,15 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <h1>Battleship</h1>
     <div class="flex-container">
       <div class="place-ships-container">
         <h2>Place your ships</h2>
-        <div id="game-pieces"></div>
+        <div id="game-pieces">
+          <div class="game-piece" draggable="true" id="carrier">
+            <div class="sub-piece" id="sub-piece-1"></div>
+            <div class="sub-piece" id="sub-piece-2"></div>
+            <div class="sub-piece" id="sub-piece-3"></div>
+            <div class="sub-piece" id="sub-piece-4"></div>
+            <div class="sub-piece" id="sub-piece-5"></div>
+          </div>
+          <div class="game-piece" draggable="true" id="destroyer">
+            <div class="sub-piece" id="sub-piece-1"></div>
+            <div class="sub-piece" id="sub-piece-2"></div>
+            <div class="sub-piece" id="sub-piece-3"></div>
+            <div class="sub-piece" id="sub-piece-4"></div>
+          </div>
+          <div class="game-piece" draggable="true" id="battleship">
+            <div class="sub-piece" id="sub-piece-1"></div>
+            <div class="sub-piece" id="sub-piece-2"></div>
+            <div class="sub-piece" id="sub-piece-3"></div>
+          </div>
+          <div class="game-piece" draggable="true" id="submarine">
+            <div class="sub-piece" id="sub-piece-1"></div>
+            <div class="sub-piece" id="sub-piece-2"></div>
+            <div class="sub-piece" id="sub-piece-3"></div>
+          </div>
+          <div class="game-piece" draggable="true" id="patrol-boat">
+            <div class="sub-piece" id="sub-piece-1"></div>
+            <div class="sub-piece" id="sub-piece-2"></div>
+          </div>
+        </div>
       </div>
-      <div class="grid"></div>
+      <div id="grid"></div>
     </div>
     <script type="module" src="app.js"></script>
   </body>
