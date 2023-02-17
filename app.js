@@ -32,26 +32,37 @@ function dragStart(e) {
 
 function dragEnter(e) {
   e.preventDefault()
-  console.log('enter')
+  // console.log('enter')
 }
 
 function dragOver(e) {
   e.preventDefault();
-  console.log('over')
+  // console.log('over')
 }
 
 function drop(e) {
   e.preventDefault();
-  // Get the IDs of the dropped game piece and its sub-pieces from the dataTransfer object
-  const {pieceId, subPieceIds} = JSON.parse(e.dataTransfer.getData('text/plain'));
-  // Get the dropped game piece element
-  const gamePiece = document.getElementById(pieceId);
-  // Move the game piece to the drop target
-  e.target.appendChild(gamePiece);
-  // Move the sub-pieces of the dropped game piece to the drop target
-  subPieceIds.forEach(subPieceId => {
-    const subPiece = document.getElementById(subPieceId);
-    e.target.appendChild(subPiece);
-  });
+  const {pieceId, subPieceIds} = JSON.parse(e.dataTransfer.getData('text/plain'))
+  const gamePiece = document.getElementById(pieceId)
+  const gameBoardCellSize = 1
+  const gamePieceSize = subPieceIds.length
+  const cellsToOccupy = gamePieceSize 
+  const dropTarget = e.target.closest('.grid-cell')
+  // Check that the drop target has enough cells to accommodate the game piece
+  const cells = Array.from(dropTarget.parentElement.querySelectorAll('.grid-cell'))
+  // const cellsInRow = cells.length / 10
+  const cellIndex = Array.from(cells).indexOf(dropTarget)
+  const cellsToCheck = cells.slice(cellIndex, cellIndex + cellsToOccupy)
+  console.log(cellsToCheck)
+  if (cellsToCheck.every(cell => !cell.classList.contains('occupied'))) {
+    // Occupy the cells with the game piece and its sub-pieces
+    dropTarget.classList.add('occupied')
+    for (let i = 0; i < cellsToOccupy; i++) {
+      cells[cellIndex + i].classList.add('occupied')
+    }
+    gamePiece.style.display = 'none'
+    gamePiece.previousElementSibling.style.display = 'none'
+  }
 }
+
 
