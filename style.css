@@ -35,15 +35,16 @@ h1 {
   flex-direction: column;
 }
 
-#grid {
+#player-grid, #enemy-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   width: 400px;
   height: 400px;
+  padding-top: 1rem;
 }
 
-#grid div {
+#player-grid div, #enemy-grid div {
   background-color: #fff;
   border: 1px solid #333;
 }
@@ -72,12 +73,14 @@ h1 {
   cursor: grab;
 }
 
-#grid > .grid-cell.occupied {
+#player-grid > .grid-cell.occupied {
   background-color: #1de369a3;
 }
 
-.sub-piece.dragging {
-  opacity: 0.5;
-  cursor: grabbing;
+.piece-and-info {
+  text-align: center;
 }
 
+.player-grid-container, .enemy-grid-container {
+  text-align: center;
+}
