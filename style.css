@@ -35,6 +35,10 @@ h1 {
   flex-direction: column;
 }
 
+.player-grid-container, .enemy-grid-container {
+  text-align: center;
+}
+
 #player-grid, #enemy-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -56,13 +60,13 @@ h1 {
   flex-direction: column;
   height: 300px;
   width: 300px;
-  margin-top: 20px;
+  margin-top: 100px;
 }
 
 .game-piece {
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
 }
 
 .sub-piece {
@@ -79,8 +83,9 @@ h1 {
 
 .piece-and-info {
   text-align: center;
+  padding: 10px;
 }
 
-.player-grid-container, .enemy-grid-container {
-  text-align: center;
+.piece-and-info > p {
+  font-size: 1.5rem;
 }
