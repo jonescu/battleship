@@ -15,6 +15,7 @@ for (let i = 0; i < 100; i++) {
 for(let i = 0; i< 100; i++) {
   const enemy_cell = document.createElement('div')
   enemy_cell.classList.add('enemy-cell')
+  enemy_cell.id = `${i}`
   enemy_grid.appendChild(enemy_cell)
 }
 
@@ -71,5 +72,12 @@ function drop(e) {
     gamePiece.previousElementSibling.style.display = 'none'
   }
 }
+
+enemy_cells.forEach(cell => {
+  cell.addEventListener('click', () => {
+    cell.style.backgroundColor = 'red'
+    cell.classList.add(' ')
+  })
+})
 
 
