@@ -5,10 +5,20 @@ const ships_container = document.querySelector('#game-pieces')
 const player_ships = document.querySelectorAll('.game-piece')
 
 // Create the grid
-for (let i = 0; i < 100; i++) {
-  const cell = document.createElement('div')
-  cell.classList.add('grid-cell')
-  player_grid.appendChild(cell)
+for (let row = 0; row < 10; row++) {
+  for (let col = 0; col < 10; col++) {
+    // Create a new div element for the grid cell
+    const cell = document.createElement("div")
+    cell.classList.add('grid-cell')
+    // Check if the cell is an edge piece
+    if (row === 0 || col === 0 || row === 9 || col === 9) {
+      // Set a unique identifier for the edge pieces
+      cell.id = `edge-${row}-${col}`;
+    }
+    
+    // Add the cell to the container
+    player_grid.appendChild(cell)
+  }
 }
 
 // Create enemy grid
@@ -54,14 +64,15 @@ function drop(e) {
   // Check that the drop target has enough cells to accommodate the game piece 
   const cells = Array.from(dropTarget.parentElement.querySelectorAll('.grid-cell'))
   const cellIndex = Array.from(cells).indexOf(dropTarget)
+  // console.log(dropTarget, cellIndex, +cellIndex.toString().split('')[1])
+
+  // if(cellIndex + dropTarget > `${cellIndex.at(1)}9`) {
+  //   cellIndex = cellIndex - gamePiece
+  // }
 
   // Prevent pieces from being placed directly next to one another
-  const horizontalCellsToCheck = cells.slice(cellIndex -1, cellIndex + gamePieceSize + 1)
-  const cellsAboveToCheck = cells.slice(cellIndex -10, cellIndex -10 + gamePieceSize)
-  const cellsBelowToCheck = cells.slice(cellIndex +10, cellIndex +10 + gamePieceSize)
-  const cellsToCheck = [...horizontalCellsToCheck, ...cellsAboveToCheck, ...cellsBelowToCheck]
-
-
+  const cellsToCheck = cells.slice(cellIndex -1, cellIndex + gamePieceSize + 1)
+  
   if (cellsToCheck.every(cell => !cell.classList.contains('occupied'))) {
     // Occupy the cells with the game piece and its sub-pieces
     dropTarget.classList.add('occupied')
