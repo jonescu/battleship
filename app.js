@@ -66,16 +66,21 @@ function drop(e) {
   const cellIndex = Array.from(cells).indexOf(dropTarget)
 
   // Prevent pieces from being placed directly next to one another
-  const cellsToCheck = cells.slice(cellIndex -1, cellIndex + gamePieceSize + 1)
+  let cellsToCheck = cells.slice(cellIndex -1, cellIndex + gamePieceSize + 1)
   const rowsToCheck = []
 
-  // Loop through the divs and store their ids in the array
+  // Allows user to place piece on left side of board without piece wrapping to line above
+  if(cellIndex.toString().slice(1)) {
+    cellsToCheck = cells.slice(cellIndex, cellIndex + gamePieceSize + 1)
+  }
+
   for (let i = 0; i < cellsToCheck.length -1; i++) {
     if(cellsToCheck[i].id != '') {
       rowsToCheck.push(+cellsToCheck[i].id.slice(5,6))
     }
   }
-
+  
+  // Check if cells aren't occupied, or on different rows
   if (cellsToCheck.every(cell => !cell.classList.contains('occupied')) && 
       rowsToCheck.every(row => row === rowsToCheck[0])) {
     // Occupy the cells with the game piece and its sub-pieces
@@ -88,6 +93,7 @@ function drop(e) {
   }
 }
 
+// Add red background
 enemy_cells.forEach(cell => {
   cell.addEventListener('click', () => {
     cell.style.backgroundColor = 'red'
