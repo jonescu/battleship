@@ -64,16 +64,20 @@ function drop(e) {
   // Check that the drop target has enough cells to accommodate the game piece 
   const cells = Array.from(dropTarget.parentElement.querySelectorAll('.grid-cell'))
   const cellIndex = Array.from(cells).indexOf(dropTarget)
-  // console.log(dropTarget, cellIndex, +cellIndex.toString().split('')[1])
-
-  // if(cellIndex + dropTarget > `${cellIndex.at(1)}9`) {
-  //   cellIndex = cellIndex - gamePiece
-  // }
 
   // Prevent pieces from being placed directly next to one another
   const cellsToCheck = cells.slice(cellIndex -1, cellIndex + gamePieceSize + 1)
-  
-  if (cellsToCheck.every(cell => !cell.classList.contains('occupied'))) {
+  const rowsToCheck = []
+
+  // Loop through the divs and store their ids in the array
+  for (let i = 0; i < cellsToCheck.length -1; i++) {
+    if(cellsToCheck[i].id != '') {
+      rowsToCheck.push(+cellsToCheck[i].id.slice(5,6))
+    }
+  }
+
+  if (cellsToCheck.every(cell => !cell.classList.contains('occupied')) && 
+      rowsToCheck.every(row => row === rowsToCheck[0])) {
     // Occupy the cells with the game piece and its sub-pieces
     dropTarget.classList.add('occupied')
     for (let i = 0; i < gamePieceSize; i++) {
