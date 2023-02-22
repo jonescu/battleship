@@ -70,10 +70,11 @@ function drop(e) {
   const rowsToCheck = []
 
   // Allows user to place piece on left side of board without piece wrapping to line above
-  if(cellIndex.toString().slice(1)) {
+  if(+cellIndex.toString().slice(1) === 0) {
     cellsToCheck = cells.slice(cellIndex, cellIndex + gamePieceSize + 1)
   }
 
+  // console.log(cellIndex.toString().slice(1))
   for (let i = 0; i < cellsToCheck.length -1; i++) {
     if(cellsToCheck[i].id != '') {
       rowsToCheck.push(+cellsToCheck[i].id.slice(5,6))
