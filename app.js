@@ -35,6 +35,10 @@ const enemy_cells = enemy_grid.querySelectorAll('.enemy-cell')
 // Implement drag & drop functionality
 player_ships.forEach(ship => {
   ship.addEventListener('dragstart', dragStart)
+  ship.addEventListener('click', (e) => {
+   const shipToRotate = e.target.parentElement
+   shipToRotate.classList.toggle('vertical')
+  })
 })
 
 grid_cells.forEach(cell => {
@@ -94,7 +98,6 @@ function drop(e) {
       cells[cellIndex + i].classList.add('occupied')
     }
     gamePiece.style.display = 'none'
-    gamePiece.previousElementSibling.style.display = 'none'
   }
 }
 
@@ -105,5 +108,4 @@ enemy_cells.forEach(cell => {
     cell.classList.add(' ')
   })
 })
-
 

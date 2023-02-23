@@ -62,14 +62,23 @@ h1 {
   flex-direction: column;
   height: 300px;
   width: 300px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .game-piece {
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: rotate(0deg);
 }
+
+.game-piece.vertical {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(90deg);
+}
+
 
 .sub-piece {
   width: 40px;
@@ -91,3 +100,4 @@ h1 {
 .piece-and-info > p {
   font-size: 1.5rem;
 }
+
