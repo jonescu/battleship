@@ -20,84 +20,46 @@ h1 {
   letter-spacing: 1rem;
 }
 
-.flex-container {
+.pieces-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 100vw;
-  background-color: #ddd;
-  border: 2px solid #333;
+  width: 500px;
+  height: 140px;
+  background-color: grey;
+  margin: 0 auto;
 }
 
-.place-ships-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  flex-direction: column;
+.carrier, .destroyer, .battleship, .submarine, .patrol-boat {
+  background-color: rgb(99, 228, 99);
 }
 
-.player-grid-container, .enemy-grid-container {
-  text-align: center;
+.carrier-piece {
+  height: 20px;
+  width: 100px;
+  margin: 3px;
 }
 
-#player-grid, #enemy-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  width: 400px;
-  height: 400px;
-  padding-top: 1rem;
+.destroyer-piece {
+  height: 20px;
+  width: 80px;
+  margin: 3px;
 }
 
-#player-grid div, #enemy-grid div {
-  background-color: #fff;
-  border: 1px solid #333;
+.battleship-piece {
+  height: 20px;
+  width: 60px;
+  margin: 3px;
 }
 
-#game-pieces {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
-  height: 300px;
-  width: 300px;
-  margin-top: 50px;
+.submarine-piece {
+  height: 20px;
+  width: 60px;
+  margin: 3px;
 }
 
-.game-piece {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(0deg);
-}
-
-.game-piece.vertical {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(90deg);
-}
-
-
-.sub-piece {
+.patrol-boat-piece {
+  height: 20px;
   width: 40px;
-  height: 40px;
-  background-color: #1de369a3;
-  border: 2px solid #fff;
-  cursor: grab;
-}
-
-#player-grid > .grid-cell.occupied {
-  background-color: #1de369a3;
-}
-
-.piece-and-info {
-  text-align: center;
-  padding: 10px;
-}
-
-.piece-and-info > p {
-  font-size: 1.5rem;
-}
-
+  margin: 3px;
+} 

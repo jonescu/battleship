@@ -22,64 +22,34 @@
   </head>
   <body>
     <h1>Battleship</h1>
-    <div class="flex-container">
-      <div class="place-ships-container">
-        <h2>Drag your ships onto the board</h2>
-        <p>Click a piece to rotate it</p>
-        <div id="game-pieces">
-          <div class="piece-and-info">
-            <!-- <p>Carrier</p> -->
-            <div class="game-piece" draggable="true" id="carrier">
-              <div class="sub-piece" id="sub-piece-1"></div>
-              <div class="sub-piece" id="sub-piece-2"></div>
-              <div class="sub-piece" id="sub-piece-3"></div>
-              <div class="sub-piece" id="sub-piece-4"></div>
-              <div class="sub-piece" id="sub-piece-5"></div>
-            </div>
-          </div>
-          <div class="piece-and-info">
-            <!-- <p>Destroyer</p> -->
-            <div class="game-piece" draggable="true" id="destroyer">
-              <div class="sub-piece" id="sub-piece-1"></div>
-              <div class="sub-piece" id="sub-piece-2"></div>
-              <div class="sub-piece" id="sub-piece-3"></div>
-              <div class="sub-piece" id="sub-piece-4"></div>
-            </div>
-          </div>
-          <div class="piece-and-info">
-            <!-- <p>Battleship</p> -->
-            <div class="game-piece" draggable="true" id="battleship">
-              <div class="sub-piece" id="sub-piece-1"></div>
-              <div class="sub-piece" id="sub-piece-2"></div>
-              <div class="sub-piece" id="sub-piece-3"></div>
-            </div>
-          </div>
-          <div class="piece-and-info">
-            <!-- <p>Submarine</p> -->
-            <div class="game-piece" draggable="true" id="submarine">
-              <div class="sub-piece" id="sub-piece-1"></div>
-              <div class="sub-piece" id="sub-piece-2"></div>
-              <div class="sub-piece" id="sub-piece-3"></div>
-            </div>
-          </div>
-          <div class="piece-and-info">
-            <!-- <p>Patrol Boat</p> -->
-            <div class="game-piece" draggable="true" id="patrol-boat">
-              <div class="sub-piece" id="sub-piece-1"></div>
-              <div class="sub-piece" id="sub-piece-2"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="player-grid-container">
-        <h2>Friendly Waters</h2>
-        <div id="player-grid"></div>
-      </div>
-      <div class="enemy-grid-container">
-        <h2>Enemy Waters</h2>
-        <div id="enemy-grid"></div>
-      </div>
+    <div class="gameboard-container"></div>
+    <div class="pieces-container">
+      <div class="carrier-piece carrier" draggable="true" id="carrier"></div>
+
+      <div
+        class="destroyer-piece destroyer"
+        draggable="true"
+        id="destroyer"
+      ></div>
+
+      <div
+        class="battleship-piece battleship"
+        draggable="true"
+        id="battleship"
+      ></div>
+
+      <div
+        class="submarine-piece submarine"
+        draggable="true"
+        id="submarine"
+      ></div>
+
+      <div
+        class="patrol-boat-piece patrol-boat"
+        draggable="true"
+        id="patrol-boat"
+      ></div>
     </div>
-    <script type="module" src="app.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
