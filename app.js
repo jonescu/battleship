@@ -3,15 +3,17 @@ const gameboards_container = document.querySelector('.gameboards-container')
 const game_pieces = Array.from(game_pieces_container.children)
 
 // Rotate pieces
+let rotation
 game_pieces.forEach(piece => {
-  piece.addEventListener('click', (e) => {
-    if(!e.target.classList.contains('horizontal')) {
-      e.target.classList.add('horizontal')
-    } else {
-      e.target.classList.remove('horizontal')
-    }
-  })
+  piece.addEventListener('click', rotate)
 })
+
+function rotate() {
+  rotation = rotation === 0 ? 90 : 0
+  game_pieces.forEach(piece => {
+    piece.style.transform = `rotate(${rotation}deg)`
+  })
+}
 
 
 // Create game boards

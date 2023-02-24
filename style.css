@@ -20,24 +20,30 @@ h1 {
   letter-spacing: 1rem;
 }
 
+h4 {
+  font-family: inherit;
+  text-align: center;
+}
+
 .pieces-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 600px;
-  height: 200px;
-  background-color: grey;
-  margin: 0 auto;
+  margin: 20px auto;
+  padding: 50px;
 }
 
 .gameboards-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: grid;
+  grid-template-areas: "friendly enemy"
+                       "player computer";
+  place-items: center;
 }
 
 .carrier, .destroyer, .battleship, .submarine, .patrol-boat {
   background-color: rgb(99, 228, 99);
+  cursor: pointer;
 }
 
 .carrier-piece {
@@ -70,21 +76,33 @@ h1 {
   margin: 3px;
 } 
 
-.horizontal {
-  transform: rotate(90deg);
-}
-
 .game-board {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   width: 300px;
   height: 300px;
-  background-color: #ffffff;
 }
 
 .cell {
   width: 30px;
   height: 30px;
-  background-color: #999;
   border: 1px solid black;
+}
+
+#computer {
+  grid-area: computer;
+}
+
+#player {
+  grid-area: player
+}
+
+.friendly {
+  grid-area: friendly
+  text-align-center
+}
+
+.enemy {
+  grid-area: enemy;
+  text-align: center;
 }

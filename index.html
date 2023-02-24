@@ -22,6 +22,7 @@
   </head>
   <body>
     <h1>Battleship</h1>
+    <h4>Drag your pieces onto your board, click to rotate</h4>
     <div class="pieces-container">
       <div class="carrier-piece carrier" draggable="true" id="carrier"></div>
 
@@ -49,7 +50,11 @@
         id="patrol-boat"
       ></div>
     </div>
-    <div class="gameboards-container"></div>
+
+    <div class="gameboards-container">
+      <h4 class="friendly">Friendly Waters</h4>
+      <h4 class="enemy">Enemy Waters</h4>
+    </div>
     <script src="app.js"></script>
   </body>
 </html>
