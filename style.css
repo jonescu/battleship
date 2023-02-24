@@ -27,11 +27,11 @@ h4 {
 
 .pieces-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   width: 600px;
-  margin: 20px auto;
   padding: 50px;
+  margin: 50px 0 1rem 50px;
 }
 
 .gameboards-container {
@@ -41,7 +41,7 @@ h4 {
   place-items: center;
 }
 
-.carrier, .destroyer, .battleship, .submarine, .patrol-boat {
+.carrier, .destroyer, .battleship, .submarine, .patrol {
   background-color: rgb(99, 228, 99);
   cursor: pointer;
 }
@@ -70,7 +70,7 @@ h4 {
   margin: 3px;
 }
 
-.patrol-boat-piece {
+.patrol-piece {
   height: 30px;
   width: 60px;
   margin: 3px;

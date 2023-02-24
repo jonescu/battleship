@@ -1,3 +1,4 @@
+// Get html elements
 const game_pieces_container = document.querySelector('.pieces-container')
 const gameboards_container = document.querySelector('.gameboards-container')
 const game_pieces = Array.from(game_pieces_container.children)
@@ -16,8 +17,7 @@ function rotate() {
 }
 
 
-// Create game boards
-
+// Create game boards, assign unique id for player or computer
 function createBoard(user) {
   const gameboard_container = document.createElement('div')
   gameboard_container.classList.add('game-board')
@@ -34,3 +34,46 @@ function createBoard(user) {
 
 createBoard('player')
 createBoard('computer')
+
+// Create ships 
+function createShip(name, length) {
+  return {
+    name: name,
+    length: length
+  }
+}
+
+const destroyer = createShip('destroyer', 4)
+const battleship = createShip('battleship', 3)
+const submarine = createShip('submarine', 3)
+const patrol = createShip('patrol', 2)
+const carrier = createShip('carrier', 5)
+
+const ships = [carrier, destroyer, battleship, submarine, patrol]
+
+// Place ships randomly on enemy board
+function placeEnemyPieces(ship) {
+  const allBoardCells = document.querySelectorAll('#computer div')
+  // Randomly vertical or horizontal
+  let horizontal = Math.random() < 0.5
+  let randomCell = Math.floor(Math.random() * 100)  
+  let cellsToOccupy = []
+
+  for(let i = 0; i<ship.length; i++) {
+    // Occupy horizontal
+    if(horizontal) {
+      cellsToOccupy.push(allBoardCells[+randomCell + i])
+    }
+    // Occupy vertical
+    else {
+      cellsToOccupy.push(allBoardCells[+randomCell + i * 10])
+    }
+  }
+  
+  cellsToOccupy.forEach(cell => {
+    cell.classList.add(ship.name)
+    cell.classList.add('occupied')
+  })
+}
+
+ships.forEach(ship => placeEnemyPieces(ship))
