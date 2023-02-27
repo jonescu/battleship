@@ -61,7 +61,6 @@ function placeEnemyPieces(ship) {
   let cellsToOccupy = []
   
   // Make sure ships don't over flow outside the board
-
   if (horizontal) {
     if (randomCell <= width * width - ship.length) {
       validCell = randomCell;
@@ -73,7 +72,7 @@ function placeEnemyPieces(ship) {
     if (randomCell <= width * width - width * ship.length) {
       validCell = randomCell;
     } else {
-      validCell = randomCell - ship.length * width + width;
+      validCell = width * width - width * ship.length;
     }
   }
 
