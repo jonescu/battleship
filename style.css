@@ -42,8 +42,27 @@ h4 {
 }
 
 .carrier, .destroyer, .battleship, .submarine, .patrol {
-  background-color: rgb(99, 228, 99);
   cursor: pointer;
+}
+
+.carrier {
+  background-color: red;
+}
+
+.destroyer {
+  background-color: orange;
+}
+
+.battleship {
+  background-color: blue;
+}
+
+.submarine {
+  background-color: purple;
+}
+
+.patrol {
+  background-color: green;
 }
 
 .carrier-piece {

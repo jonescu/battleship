@@ -57,25 +57,26 @@ function placeEnemyPieces(ship) {
   // Randomly vertical or horizontal
   let horizontal = Math.random() < 0.5
   let randomCell = Math.floor(Math.random() * width * width)  
-  // let validCell
   let cellsToOccupy = []
   
   // Make sure ships don't over flow outside the board
   if (horizontal) {
+    // Check horizontal
     if (randomCell <= width * width - ship.length) {
       validCell = randomCell;
     } else {
-      validCell = width * width - ship.length;
+      validCell = width * width - ship.length
     }
-    //Check vertical
+    // Check vertical
   } else {
     if (randomCell <= width * width - width * ship.length) {
-      validCell = randomCell;
+      validCell = randomCell
     } else {
-      validCell = width * width - width * ship.length;
+      // validCell = width * width - width * ship.length
+      validCell = randomCell - ship.length * width + width
     }
   }
-
+  
   for(let i = 0; i<ship.length; i++) {
     // Occupy horizontal
     if(horizontal) {
@@ -87,10 +88,29 @@ function placeEnemyPieces(ship) {
     }
   }
   
-  cellsToOccupy.forEach(cell => {
-    cell.classList.add(ship.name)
-    cell.classList.add('occupied')
-  })
+
+  // Check for ships crossing each other and ships overflowing to next row
+  let valid
+  
+  if(horizontal) {
+    cellsToOccupy.every((cell,index) => 
+      valid = cellsToOccupy[0].id % width !== width - (cellsToOccupy.length - (index +1)))
+    } else {
+    cellsToOccupy.every((cell, index) => 
+      valid = cellsToOccupy[0].id < 90 + (width * index + 1)
+    )
+  }
+
+  const notOccupied = cellsToOccupy.every(cell => !cell.classList.contains('occupied'))
+
+  if(valid && notOccupied) {
+    cellsToOccupy.forEach(cell => {
+      cell.classList.add(ship.name)
+      cell.classList.add('occupied')
+    })
+  } else {
+    placeEnemyPieces(ship)
+  }
 }
 
 ships.forEach(ship => placeEnemyPieces(ship))
