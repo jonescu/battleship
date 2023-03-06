@@ -53,7 +53,7 @@ const ships = [carrier, destroyer, battleship, submarine, patrol]
 
 // Place ships randomly on enemy board
 function placeEnemyPieces(ship) {
-  const allBoardCells = document.querySelectorAll('#computer div')
+  const computer_cells = document.querySelectorAll('#computer div')
   // Randomly vertical or horizontal
   let horizontal = Math.random() < 0.5
   let randomCell = Math.floor(Math.random() * width * width)  
@@ -80,14 +80,13 @@ function placeEnemyPieces(ship) {
   for(let i = 0; i<ship.length; i++) {
     // Occupy horizontal
     if(horizontal) {
-      cellsToOccupy.push(allBoardCells[+validCell + i])
+      cellsToOccupy.push(computer_cells[+validCell + i])
     }
     // Occupy vertical
     else {
-      cellsToOccupy.push(allBoardCells[+validCell + i * 10])
+      cellsToOccupy.push(computer_cells[+validCell + i * 10])
     }
   }
-  
 
   // Check for ships crossing each other and ships overflowing to next row
   let valid
@@ -114,3 +113,40 @@ function placeEnemyPieces(ship) {
 }
 
 ships.forEach(ship => placeEnemyPieces(ship))
+
+// Implement drag & drop
+let dragged
+
+const player_pieces_array = Array.from(game_pieces_container.children)
+
+player_pieces_array.forEach(piece => {
+  piece.addEventListener('dragstart', dragStart)
+})
+
+const player_cells = document.querySelectorAll('#player div')
+player_cells.forEach(cell => {
+  cell.addEventListener('dragover', dragOver)
+  cell.addEventListener('drop', drop)
+})
+
+function dragStart(e) {
+  e.preventDefault()
+  dragged = e.target
+}
+
+function dragOver(e) {
+  e.preventDefault()
+}
+
+function drop(e) {
+  const start = e.target.id
+  const ship = ships[dragged.id]
+}
+
+document.querySelectorAll('#computer div').forEach(cell => {
+  cell.addEventListener('click', () => {
+    if(cell.classList.contains('occupied')) {
+      cell.classList.add('hit')
+    }
+  })
+})
