@@ -2,6 +2,7 @@
 const game_pieces_container = document.querySelector('.pieces-container')
 const gameboards_container = document.querySelector('.gameboards-container')
 const game_pieces = Array.from(game_pieces_container.children)
+const startButton = document.querySelector('#start-btn')
 const width = 10
 
 // Rotate pieces
@@ -52,14 +53,8 @@ const carrier = createShip('carrier', 5)
 const ships = [carrier, destroyer, battleship, submarine, patrol]
 let notDropped
 
-// Place ships randomly on enemy board
-function placeShips(user, ship, startId) {
-  const board_cells = document.querySelectorAll(`#${user} div`)
-  // Randomly vertical or horizontal
-  let horizontal = user === 'player' ? rotation === 0 : Math.random() < 0.5
-  let randomCell = Math.floor(Math.random() * width * width)  
-  let startIndex = startId ? startId : randomCell
-
+function getValidity(board_cells, horizontal, startIndex, ship) {
+  let validCell
   let cellsToOccupy = []
 
   // Make sure ships don't over flow outside the board
@@ -104,13 +99,26 @@ function placeShips(user, ship, startId) {
 
   const notOccupied = cellsToOccupy.every(cell => !cell.classList.contains('occupied'))
 
+  return { cellsToOccupy, valid, notOccupied }
+}
+
+// Place ships randomly on enemy board
+function placeShips(user, ship, startId) {
+  const board_cells = document.querySelectorAll(`#${user} div`)
+  // Randomly vertical or horizontal
+  let horizontal = user === 'player' ? rotation === 0 : Math.random() < 0.5
+  let randomCell = Math.floor(Math.random() * width * width)  
+  let startIndex = startId ? startId : randomCell
+
+  const { cellsToOccupy, valid, notOccupied } = getValidity(board_cells, horizontal, startIndex, ship)
+ 
   if(valid && notOccupied) {
     cellsToOccupy.forEach(cell => {
       cell.classList.add(ship.name)
       cell.classList.add('occupied')
     })
   } else {
-    if(user === 'computer') placeShips('computer', ship)
+    if(user === 'computer') placeShips('computer', ship, startId)
     if(user === 'player') notDropped = true
   }
 }
@@ -139,6 +147,8 @@ function dragStart(e) {
 
 function dragOver(e) {
   e.preventDefault()
+  const ship = ships[dragged.id]
+  previewDrop(e.target.id, ship)
 }
 
 function drop(e) {
@@ -150,9 +160,53 @@ function drop(e) {
   }
 }
 
+// Add preview drop
+function previewDrop(startIndex, ship) {
+  const allBoardCells = document.querySelectorAll('#player div')
+  let horizontal = rotation === 0
 
-//Add highlight
-// function highlight(startIndex, ship) {
-//   const allBoardCells = document.querySelectorAll('#player div')
-//   let horizontal = angle === 0
-// }
+  const { cellsToOccupy, valid, notOccupied } = getValidity(allBoardCells, horizontal, startIndex, ship)
+
+  if(valid && notOccupied) {
+    cellsToOccupy.forEach(cell => {
+      cell.classList.add('hover')
+      setTimeout(() => cell.classList.remove('hover'), 200)
+    })
+  }
+}
+
+// Game logic
+let gameOver = false
+let playerTurn
+
+// Start game
+function startGame() {
+  if(game_pieces_container.children.length != 0) {
+    alert('Please place all of your ships')
+  } else {
+    const allBoardCells = document.querySelectorAll('#computer div')
+    allBoardCells.forEach(cell => cell.addEventListener('click', attack))
+  }
+}
+
+
+function attack(e) {
+  if(!gameOver) {
+    if(e.target.classList.contains('occupied')) {
+      attackMessage(e, 'hit')
+    } else {
+      attackMessage(e, 'miss')
+   }
+  } 
+}
+
+function attackMessage(e, message) {
+  e.target.classList.add(message)
+  const messageElement = document.createElement('h1')
+  messageElement.textContent = `${message}`
+  messageElement.classList.add(`${message}-message`)
+  gameboards_container.append(messageElement)
+  setTimeout(() => messageElement.remove(), 1000)
+}
+
+startButton.addEventListener('click', startGame)

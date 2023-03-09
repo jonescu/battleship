@@ -31,7 +31,7 @@ h4 {
   align-items: center;
   width: 600px;
   padding: 50px;
-  margin: 50px 0 1rem 50px;
+  margin: - 0 1rem 50px;
 }
 
 .gameboards-container {
@@ -128,4 +128,53 @@ h4 {
 .enemy {
   grid-area: enemy;
   text-align: center;
+}
+
+.hover {
+  background-color: grey;
+}
+
+.hit {
+  background-color: red;
+}
+
+.miss {
+  background-color: #333;
+}
+
+#start-btn {
+  display: block;
+  margin: 1rem auto 0 auto;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.hit-message {
+  color: red;
+  opacity: 0;
+  animation: attack 1s;
+  text-transform: uppercase;
+  position: absolute;
+}
+
+.miss-message {
+  color: rgb(214, 181, 32);
+  opacity: 0;
+  animation: attack 1s;
+  text-transform: uppercase;
+  position: absolute;
+}
+
+@keyframes attack {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
