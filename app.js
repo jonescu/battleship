@@ -186,18 +186,34 @@ function startGame() {
   } else {
     const allBoardCells = document.querySelectorAll('#computer div')
     allBoardCells.forEach(cell => cell.addEventListener('click', attack))
+    allBoardCells.forEach(cell => cell.addEventListener('click', computerAttack))
   }
 }
 
 
+const previousAttacks = []
 function attack(e) {
-  if(!gameOver) {
+  if(!gameOver && !previousAttacks.includes(e.target)) {
     if(e.target.classList.contains('occupied')) {
       attackMessage(e, 'hit')
+      previousAttacks.push(e.target)
     } else {
       attackMessage(e, 'miss')
+      previousAttacks.push(e.target)
    }
-  } 
+  } return
+}
+
+function computerAttack(e) {
+  const playerCells = document.querySelectorAll('#player div')
+  const randomAttack = playerCells[Math.floor(Math.random() * 100)]
+  if(!previousAttacks.includes(e.target)) {
+    if(randomAttack.classList.contains('occupied'))
+        randomAttack.classList.add('hit')
+      else {
+        randomAttack.classList.add('miss')
+      }
+  } return
 }
 
 function attackMessage(e, message) {
