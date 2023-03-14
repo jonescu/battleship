@@ -200,7 +200,6 @@ function generateComputerAttack() {
   const playerCells = document.querySelectorAll('#player div')
   let randomNum = Math.floor(Math.random() * 100)
   let computerAttack = playerCells[randomNum]
-  console.log("Computer Attack: ", computerAttack, "Previous Computer Attacks: ", previousComputerAttacks)
   
     if(!gameOver && !previousComputerAttacks.includes(computerAttack)) {
       if(computerAttack.classList.contains('occupied')) {
@@ -218,28 +217,26 @@ function generateComputerAttack() {
   }
 
 function attack(e) {
-  checkWin()
   if(!gameOver && !previousHits.includes(e.target)) {
     if(e.target.classList.contains('occupied')) {
       attackMessage(e, 'hit')
       previousHits.push(e.target)
       playerHits++
       generateComputerAttack()
+      checkWin()
     } else {
       attackMessage(e, 'miss')
       previousHits.push(e.target)
       generateComputerAttack()
-   }
+    }
   }
 }
 
 function checkWin() {
   if(computerHits === 17) {
-    gameOver = true
     alert('Computer wins, restart?')
     location.reload()
   } else if(playerHits === 17) {
-    gameOver = true 
     alert('You win, restart?')
     location.reload()
   } return
