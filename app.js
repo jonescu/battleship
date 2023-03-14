@@ -177,42 +177,71 @@ function previewDrop(startIndex, ship) {
 
 // Game logic
 let gameOver = false
-let playerTurn
 
 // Start game
 function startGame() {
   if(game_pieces_container.children.length != 0) {
     alert('Please place all of your ships')
   } else {
+    this.disabled = true
+    this.style.backgroundColor = 'grey'
     const allBoardCells = document.querySelectorAll('#computer div')
     allBoardCells.forEach(cell => cell.addEventListener('click', attack))
-    allBoardCells.forEach(cell => cell.addEventListener('click', computerAttack))
   }
 }
 
+const previousHits = []
+const previousComputerHits = []
+let previousComputerAttacks = []
+let playerHits = 0
+let computerHits = 0
 
-const previousAttacks = []
+function generateComputerAttack() {
+  const playerCells = document.querySelectorAll('#player div')
+  let randomNum = Math.floor(Math.random() * 100)
+  let computerAttack = playerCells[randomNum]
+  console.log("Computer Attack: ", computerAttack, "Previous Computer Attacks: ", previousComputerAttacks)
+  
+    if(!gameOver && !previousComputerAttacks.includes(computerAttack)) {
+      if(computerAttack.classList.contains('occupied')) {
+        computerAttack.classList.add('hit')
+        computerHits++
+        previousComputerHits.push(computerAttack)
+        previousComputerAttacks.push(computerAttack)
+      } else {
+        computerAttack.classList.add('miss')
+        previousComputerAttacks.push(computerAttack)
+      }
+    } else {
+      generateComputerAttack()
+    } return
+  }
+
 function attack(e) {
-  if(!gameOver && !previousAttacks.includes(e.target)) {
+  checkWin()
+  if(!gameOver && !previousHits.includes(e.target)) {
     if(e.target.classList.contains('occupied')) {
       attackMessage(e, 'hit')
-      previousAttacks.push(e.target)
+      previousHits.push(e.target)
+      playerHits++
+      generateComputerAttack()
     } else {
       attackMessage(e, 'miss')
-      previousAttacks.push(e.target)
+      previousHits.push(e.target)
+      generateComputerAttack()
    }
-  } return
+  }
 }
 
-function computerAttack(e) {
-  const playerCells = document.querySelectorAll('#player div')
-  const randomAttack = playerCells[Math.floor(Math.random() * 100)]
-  if(!previousAttacks.includes(e.target)) {
-    if(randomAttack.classList.contains('occupied'))
-        randomAttack.classList.add('hit')
-      else {
-        randomAttack.classList.add('miss')
-      }
+function checkWin() {
+  if(computerHits === 17) {
+    gameOver = true
+    alert('Computer wins, restart?')
+    location.reload()
+  } else if(playerHits === 17) {
+    gameOver = true 
+    alert('You win, restart?')
+    location.reload()
   } return
 }
 
@@ -222,7 +251,7 @@ function attackMessage(e, message) {
   messageElement.textContent = `${message}`
   messageElement.classList.add(`${message}-message`)
   gameboards_container.append(messageElement)
-  setTimeout(() => messageElement.remove(), 1000)
+  setTimeout(() => messageElement.remove(), 500)
 }
 
 startButton.addEventListener('click', startGame)
