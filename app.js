@@ -252,3 +252,5 @@ function attackMessage(e, message) {
 }
 
 startButton.addEventListener('click', startGame)
+
+module.exports = {}
